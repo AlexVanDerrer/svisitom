@@ -18,7 +18,36 @@ export default {
         }
     },
     data() {
-      return {}
+      return {
+          selectData: [],
+          fields: [
+            {
+                key: 'cb',
+                label: '' 
+            },
+            {
+                key: 'id',
+                label: 'Номер',
+                sortable: true
+            },
+            {
+                key: 'name',
+                label: 'Название',
+                sortable: true
+            },
+            {
+                key: 'date',
+                label: 'Дата',
+                sortable: true,
+            },
+            {
+                key: 'status',
+                label: 'Статус',
+                sortable: true
+
+            }
+        ],
+      }
     },
     computed: {
         items: {
