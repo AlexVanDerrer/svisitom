@@ -1,7 +1,17 @@
 <template>
   <div class="container">
       <div class="Table--table-container">
-            <b-table striped hover :items="items"></b-table>
+            <b-table striped hover :items="items" :fields="fields">
+                    <template #cell(cb)="data">
+                        <b-form-checkbox
+                            :id="`checkbox-${data.item.cb}`"
+                            v-model="selectData"
+                            :name="`checkbox-${data.item.cb}`"
+                            :value="data"
+                            >
+                        </b-form-checkbox>
+                    </template>
+            </b-table>
       </div>
   </div>
 </template>
@@ -59,9 +69,6 @@ export default {
             }
         }
     },
-    async mounted(){
-
-    }
 }
 </script>
 
