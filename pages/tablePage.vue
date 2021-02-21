@@ -7,16 +7,23 @@
                             :id="`checkbox-${data.item.cb}`"
                             v-model="selectData"
                             :name="`checkbox-${data.item.cb}`"
-                            :value="data"
+                            :value="data.item.id"
                             >
                         </b-form-checkbox>
                     </template>
             </b-table>
+            <b-button @click.stop.prevent="selectAllItems">Выбрать все</b-button>
+            <b-button v-show="selectData.length" @click.stop.prevent="clearSelect">Отменить выбор</b-button>
+            <strong>Выбрано: </strong>{{selectData}}
+
+
+
       </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
     middleware: ['checkAuth'],
     async fetch(){
@@ -69,6 +76,22 @@ export default {
             }
         }
     },
+    methods: {
+        selectAllItems(){
+            if(this.selectData.length < this.items.length){
+                this.showClearSelect = true
+                this.items.forEach(element => {
+                    if((this.selectData.indexOf(element.id)) === -1){
+                        this.selectData.push(element.id)
+                    }
+                });
+            }
+
+        },
+        clearSelect(){
+            this.selectData = []
+        }
+    }
 }
 </script>
 
