@@ -65,17 +65,19 @@ export default {
   },
   methods: {
     onSubmit () {
-      this.loading = true
       // имитирует авторизацию
       if(this.form.login === 'admin' && this.form.pass === 'admin'){
+        this.loading = true
+        this.$store.commit('setToken', true)
         setTimeout(()=>{
           this.loading = false
           this.$router.push('tablePage')
         },1000)
       } else {
+        this.loading = true;
         setTimeout(()=>{
-          this.loading = false
           alert('Неверные логин или пароль')
+          this.onReset()
         },1000)
       }
     },
