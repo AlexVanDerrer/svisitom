@@ -1,6 +1,8 @@
 <template>
     <div>
-        <b-icon :id="`editName-${itemData.item.id}`"  icon="pencil-square"></b-icon>
+        <div class="EditIcon">
+            <b-icon :id="`editName-${itemData.item.id}`"  icon="pencil"></b-icon>
+        </div>
         <b-popover
             :target="`editName-${itemData.item.id}`"
             triggers="focus"
@@ -9,7 +11,7 @@
             :ref="`popover-${itemData.item.id}`"
         >
             <template #title>
-                Редактировать
+                Изменить название
             </template>
 
             <div>
@@ -18,12 +20,12 @@
                     description="Введите новое название"
                     invalid-feedback="This field is required"
                 >
-                <b-form-input
-                    :ref="`input${itemData.item.id}`"
-                    :id="`popover-input-${itemData.item.id}`"
-                    v-model="itemData.item.name"
-                    size="sm"
-                ></b-form-input>
+                    <b-form-input
+                        :ref="`input${itemData.item.id}`"
+                        :id="`popover-input-${itemData.item.id}`"
+                        v-model="itemData.item.name"
+                        size="sm"
+                    ></b-form-input>
                 </b-form-group>   
             </div>
         </b-popover>
@@ -37,45 +39,11 @@ export default {
             type: Object
         }
     },
-    data(){
-        return {
-            popoverShow: false,
-        }
-    },
-    methods: {
-        onClose() {
-            this.$refs[`popover-${itemData.item.id}`].hide();
-            // this.popoverShow = false
-        },
-        onOk() {
-            this.onClose()
-        },
-
-      onShown() {
-        // Called just after the popover has been shown
-        // Transfer focus to the first input
-        this.focusRef(this.$refs.input1)
-      },
-      onHidden() {
-        // Called just after the popover has finished hiding
-        // Bring focus back to the button
-        this.focusRef(this.$refs.button)
-      },
-      focusRef(ref) {
-        // Some references may be a component, functional component, or plain element
-        // This handles that check before focusing, assuming a `focus()` method exists
-        // We do this in a double `$nextTick()` to ensure components have
-        // updated & popover positioned first
-        this.$nextTick(() => {
-          this.$nextTick(() => {
-            ;(ref.$el || ref).focus()
-          })
-        })
-      }
-    }
 }
 </script>
 
 <style>
-
+.EditIcon{
+    cursor: pointer;
+}
 </style>
