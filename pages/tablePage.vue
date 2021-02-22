@@ -11,13 +11,20 @@
                             >
                         </b-form-checkbox>
                     </template>
+                    <template #cell(status)="data">
+                        <span class="text-danger">{{data.item.status}}</span>
+                        <b-icon icon="pencil-square"></b-icon>
+
+                    </template>
+                    <template #cell(name)="data">
+                        <span class="text-danger">{{data.item.name}}</span>
+                        <EditPopoverComponent :itemData="data"/>
+
+                    </template>
             </b-table>
             <b-button @click.stop.prevent="selectAllItems">Выбрать все</b-button>
             <b-button v-show="selectData.length" @click.stop.prevent="clearSelect">Отменить выбор</b-button>
             <strong>Выбрано: </strong>{{selectData}}
-
-
-
       </div>
   </div>
 </template>
@@ -90,7 +97,8 @@ export default {
         },
         clearSelect(){
             this.selectData = []
-        }
+        },
+
     }
 }
 </script>
