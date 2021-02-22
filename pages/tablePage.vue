@@ -24,9 +24,6 @@
         </template>
         <template #cell(name)="data">
           <div class="d-flex">
-            <div class="mr-3">
-              <span>{{ data.item.name }}</span>
-            </div>
             <EditPopoverComponent :item-data="data" />
           </div>
         </template>

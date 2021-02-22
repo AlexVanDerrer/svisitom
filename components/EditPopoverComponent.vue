@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="EditIcon">
-      <b-icon
-        :id="`editName-${itemData.item.id}`"
-        icon="pencil"
-      />
+      <div class="mr-3">
+        <button
+          :id="`editName-${itemData.item.id}`"
+          class="btn"
+        >
+          {{ itemData.item.name }}
+        </button>
+      </div>
     </div>
     <b-popover
       :ref="`popover-${itemData.item.id}`"
