@@ -2,7 +2,6 @@
   <div class="container LoginPage d-flex justify-content-center align-items-center">
     <div class="LoginForm shadow">
       <b-form
-        v-if="show"
         @submit.prevent="onSubmit"
         @reset.prevent="onReset"
       >
@@ -32,12 +31,14 @@
           />
         </b-form-group>
 
-
         <b-button
           type="submit"
           variant="primary"
         >
-          <b-spinner v-show="loading" small></b-spinner>
+          <b-spinner
+            v-show="loading"
+            small
+          />
           Войти
         </b-button>
         <b-button
@@ -57,37 +58,36 @@ export default {
     return {
       form: {
         login: '',
-        pass: '',
+        pass: ''
       },
-      show: true,
       loading: false
     }
   },
   methods: {
     onSubmit () {
       // имитирует авторизацию
-      if(this.form.login === 'admin' && this.form.pass === 'admin'){
+      if (this.form.login === 'admin' && this.form.pass === 'admin') {
         this.loading = true
         this.$store.commit('setToken', true)
-        setTimeout(()=>{
+        setTimeout(() => {
           this.loading = false
           this.$router.push('tablePage')
-        },1000)
+        }, 1000)
       } else {
-        this.loading = true;
-        setTimeout(()=>{
+        this.loading = true
+        setTimeout(() => {
           alert('Неверные логин или пароль')
           this.onReset()
-        },1000)
+        }, 1000)
       }
     },
     onReset () {
-      this.loading = true;
-      setTimeout(()=> {
+      this.loading = true
+      setTimeout(() => {
         this.loading = false
         this.form.login = ''
         this.form.pass = ''
-      },300)
+      }, 300)
     }
   }
 }
